@@ -1,27 +1,29 @@
-import React from "react";
-import { ScrollView, StyleSheet, Text, View } from "react-native";
+import React from 'react'
+import { Button, ScrollView, StyleSheet } from 'react-native'
 
 // components
-import { Header } from "../components/header";
-import { Menu } from "../components/menu";
-interface HomeProps {}
+import { Header } from '../components/header'
 
-export const Home: React.FunctionComponent<HomeProps> = ({}) => {
+interface HomeProps {
+  navigation: any
+}
+
+export const Home: React.FunctionComponent<HomeProps> = ({ navigation }) => {
+  function goToMenu() {
+    navigation.navigate('Menu')
+  }
+
   const styles = StyleSheet.create({
     container: {
-      marginTop: 100,
-      marginBottom: 100,
       paddingRight: 20,
       paddingLeft: 20,
+      backgroundColor: 'white',
     },
-  });
-
+  })
   return (
-    <ScrollView>
-      <View style={styles.container}>
-        <Header />
-        <Menu />
-      </View>
+    <ScrollView style={styles.container}>
+      <Header />
+      <Button title="Consulter la carte" onPress={() => goToMenu()} />
     </ScrollView>
-  );
-};
+  )
+}

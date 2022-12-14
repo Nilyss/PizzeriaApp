@@ -1,53 +1,44 @@
-import React from "react";
-import { useEffect, useState } from "react";
-import { View, Text, Image, StyleSheet, Button, Pressable } from "react-native";
-
-// datas
-import menuData from "../data/pizzas.json";
+import React from 'react'
+import { useContext } from 'react'
+import { View, Text, Image, StyleSheet, Pressable } from 'react-native'
 
 // models
-import { Pizza } from "../models/pizza";
+import { Pizza } from '../models/pizza'
+
+// context
+import { PizzaContext } from '../context'
 
 // init component
-interface MenuProps {}
+interface CardsProps {}
 
-export const Menu: React.FunctionComponent<MenuProps> = ({}) => {
-  const [menu, setMenu] = useState([]);
-
-  // get datas from JSON
-  useEffect(() => {
-    const getPizzas = () => {
-      setMenu(menuData);
-    };
-    getPizzas();
-  }, []);
+export const Cards: React.FunctionComponent<CardsProps> = ({}) => {
+  const pizzas = useContext(PizzaContext)
 
   // component styles
   const styles = StyleSheet.create({
     // ********** Wrapper **********
     menuWrapper: {
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-      justifyContent: "center",
-      marginTop: 20,
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
     },
     cardWrapper: {
-      display: "flex",
-      flexDirection: "row",
-      width: "100%",
-      backgroundColor: "#f2f2f2",
+      display: 'flex',
+      flexDirection: 'row',
+      width: '100%',
+      backgroundColor: '#f2f2f2',
       borderRadius: 8,
     },
     cardWrapper__text: {
       padding: 20,
-      display: "flex",
-      justifyContent: "space-between",
+      display: 'flex',
+      justifyContent: 'space-between',
     },
     cardWrapper__text__priceAndButton: {
-      display: "flex",
-      flexDirection: "row",
-      alignItems: "center",
+      display: 'flex',
+      flexDirection: 'row',
+      alignItems: 'center',
     },
 
     // ********** Elements **********
@@ -58,7 +49,7 @@ export const Menu: React.FunctionComponent<MenuProps> = ({}) => {
       borderRadius: 8,
     },
     pizzaName: {
-      fontWeight: "bold",
+      fontWeight: 'bold',
       fontSize: 24,
     },
     pizzaIngredients: {
@@ -71,23 +62,23 @@ export const Menu: React.FunctionComponent<MenuProps> = ({}) => {
     },
     buttonStyle: {
       padding: 10,
-      display: "flex",
-      alignSelf: "center",
-      backgroundColor: "#FF7F50",
+      display: 'flex',
+      alignSelf: 'center',
+      backgroundColor: '#FF7F50',
       borderRadius: 4,
     },
     buttonText: {
       fontSize: 16,
-      color: "white",
+      color: 'white',
     },
-  });
+  })
 
   // render
 
   return (
     <View>
-      {menu &&
-        menu.map((pizza: Pizza, index: number) => {
+      {pizzas &&
+        pizzas.map((pizza: Pizza, index: number) => {
           return (
             <View key={index} style={styles.menuWrapper}>
               <View style={styles.cardWrapper}>
@@ -109,8 +100,8 @@ export const Menu: React.FunctionComponent<MenuProps> = ({}) => {
                 </View>
               </View>
             </View>
-          );
+          )
         })}
     </View>
-  );
-};
+  )
+}
