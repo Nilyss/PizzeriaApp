@@ -1,19 +1,19 @@
-import React from "react";
-import { createNativeStackNavigator } from "react-native-screens/native-stack";
+import React from 'react'
+import { createNativeStackNavigator } from 'react-native-screens/native-stack'
 
 // view
-import { Home } from "../views/home";
-import { Menu } from "../views/menu";
+import { Home } from '../views/home'
+import { PizzaDetails } from '../views/pizzaDetails'
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator()
 
 export const Routes = () => {
   return (
     <Stack.Navigator>
       <Stack.Group>
-        <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen name="Menu" component={Menu} />
+        <Stack.Screen name="home" component={Home} />
+        <Stack.Screen name="pizza" component={PizzaDetails} />
       </Stack.Group>
     </Stack.Navigator>
-  );
-};
+  )
+}
