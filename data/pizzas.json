@@ -1,17 +1,20 @@
 [
   {
+    "_id": "02f24af3a45b494d849f80de08f6cc15",
     "name": "Queen",
     "ingredients": "Sauce tomate à l'origan, mozzarella, jambon et champignons frais",
     "price": "11.90",
     "picture": "https://api.pizzahut.io/v1/content/fr-fr/fr-1/images/pizza/queen.325476215d892a3564d940e5a202c24b.1.jpg"
   },
   {
+    "_id" : "50cf6fe31b1e45a2a49a9d5d9770ec6e",
     "name": "Raclette",
     "ingredients": "Crème fraîche légère, mozzarella, pommes de terre, lardons et fromage à raclette",
     "price": "15.00",
     "picture": "https://api.pizzahut.io/v1/content/fr-fr/fr-1/images/pizza/raclette.cc4ea3d7aa9bc6bdc52a9dd15c965f43.1.jpg"
   },
   {
+    "_id" : "cb6a6ac98a9e4ab1bed529b3e2557ae4",
     "name": "Végétarienne",
     "ingredients": "Sauce tomate à l'origan, mozzarella, champignons frais, oignons rouges frais, poivrons verts frais, tomates fraîches et Olives noires",
     "price": "15.90",

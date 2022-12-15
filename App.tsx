@@ -1,15 +1,19 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View, Image } from "react-native";
+import { NavigationContainer } from '@react-navigation/native'
+import { store } from './redux/store'
+import { Provider } from 'react-redux'
+import { PizzaProvider } from './context'
 
-// view
-import { Home } from "./views/home";
+// Routes
+import { Routes } from './Routes/routes'
 
 export default function App() {
-  const styles = StyleSheet.create({});
   return (
-    <View>
-      <Home />
-      <StatusBar style="auto" />
-    </View>
-  );
+    <PizzaProvider>
+      <Provider store={store}>
+        <NavigationContainer>
+          <Routes />
+        </NavigationContainer>
+      </Provider>
+    </PizzaProvider>
+  )
 }
