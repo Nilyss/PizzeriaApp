@@ -1,17 +1,31 @@
 import React from 'react'
-import { ScrollView, StyleSheet, View } from 'react-native'
+import { Button, ScrollView, StyleSheet, View } from 'react-native'
 
 // components
 import { Header } from '../components/header'
 import { Cards } from '../components/cards'
-interface MenuProps {}
+interface MenuProps {
+  navigation: any
+}
 
-export const PizzaDetails: React.FunctionComponent<MenuProps> = () => {
+export const PizzaDetails: React.FunctionComponent<MenuProps> = ({
+  navigation,
+}) => {
+  function goToBasket() {
+    navigation.navigate('basket')
+  }
   return (
     <ScrollView style={styles.container}>
       <Header />
       <View>
         <Cards />
+        <View style={styles.buttonWrapper}>
+          <Button
+            color="#FF7F50"
+            title="Consulter le panier"
+            onPress={() => goToBasket()}
+          />
+        </View>
       </View>
     </ScrollView>
   )
@@ -22,5 +36,8 @@ const styles = StyleSheet.create({
     paddingRight: 20,
     paddingLeft: 20,
     backgroundColor: '#ffffff',
+  },
+  buttonWrapper: {
+    marginTop: 60,
   },
 })

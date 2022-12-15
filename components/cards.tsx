@@ -4,6 +4,9 @@ import { RouteProp, useRoute } from '@react-navigation/native'
 import { View, Text, Image, StyleSheet, Pressable } from 'react-native'
 import { Pizza } from '../models/pizza'
 import { PizzaContext } from '../context'
+import { useDispatch, useSelector } from 'react-redux'
+import type { RootState } from '../redux/store'
+import { addToCar } from '../redux/quantitySlice'
 
 // Typing for useRoute() https://stackoverflow.com/a/65615746/18481665
 export type RootStackParamList = {
@@ -15,10 +18,12 @@ export type RootRouteProps<RouteName extends keyof RootStackParamList> =
 interface CardsProps {}
 
 export const Cards: React.FunctionComponent<CardsProps> = ({}) => {
+  // ********** GET DATAS **********
+
   const [pizza, setPizza] = useState<Pizza>()
   const pizzas = useContext(PizzaContext)
 
-  // find selected pizza
+  // *********** FIND SELECTED PIZZA **********
   const route = useRoute<RootRouteProps<'params'>>()
   const id = route.params.id
   useEffect(() => {
@@ -31,6 +36,13 @@ export const Cards: React.FunctionComponent<CardsProps> = ({}) => {
     }
     getRequestedPizza()
   }, [])
+
+  // ********** ADD TO BASKET **********
+
+  const cart = useSelector((state: RootState) => state.cart)
+  const dispatch = useDispatch()
+
+  // ********** RENDER **********
 
   return (
     <View>
@@ -47,9 +59,20 @@ export const Cards: React.FunctionComponent<CardsProps> = ({}) => {
               <View style={styles.cardWrapper__text__priceAndButton}>
                 <Text style={styles.pizzaPrice}>{pizza.price} €</Text>
                 <Pressable style={styles.buttonStyle}>
-                  <Text style={styles.buttonText}>+ Ajouter</Text>
+                  <Text
+                    onPress={() => {
+                      dispatch(addToCar(pizza._id))
+                      console.log('press !')
+                    }}
+                    style={styles.buttonText}
+                  >
+                    + Ajouter
+                  </Text>
                 </Pressable>
               </View>
+              <Text style={styles.quantity}>
+                Panier : {cart.totalCartQuantity} pizza(s)
+              </Text>
             </View>
           </View>
         </View>
@@ -115,5 +138,11 @@ const styles = StyleSheet.create({
   buttonText: {
     fontSize: 16,
     color: 'white',
+  },
+  quantity: {
+    display: 'flex',
+    alignSelf: 'flex-end',
+    fontSize: 16,
+    marginTop: 20,
   },
 })

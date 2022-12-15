@@ -10,8 +10,8 @@ interface HomeProps {
 }
 
 export const Home: React.FunctionComponent<HomeProps> = ({ navigation }) => {
-  function goToPizza() {
-    navigation.navigate('pizza')
+  function goToBasket() {
+    navigation.navigate('basket')
   }
   return (
     <ScrollView style={styles.container}>
@@ -20,7 +20,7 @@ export const Home: React.FunctionComponent<HomeProps> = ({ navigation }) => {
       <Button
         color="#FF7F50"
         title="Consulter le panier"
-        onPress={() => goToPizza()}
+        onPress={() => goToBasket()}
       />
     </ScrollView>
   )

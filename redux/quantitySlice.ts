@@ -1,29 +1,49 @@
+import { Pizza } from '../models/pizza'
 import { createSlice } from '@reduxjs/toolkit'
-import type { PayloadAction } from '@reduxjs/toolkit'
 
-export interface State {
-  value: number
+type InitialState = {
+  cartArray: Array<{ id: Pizza['_id']; quantity: number }>
+  totalCartQuantity: 0
+  totalCartPrice: 0
 }
 
-const initialState: State = {
-  value: 0,
+const initialState: InitialState = {
+  cartArray: [],
+  totalCartQuantity: 0,
+  totalCartPrice: 0,
 }
 
-export const QuantitySlice = createSlice({
-  name: 'quantity',
+export const cartSlice = createSlice({
+  name: 'cart',
   initialState,
   reducers: {
-    increment: (state) => {
-      state.value += 1
-    },
-    decrement: (state) => {
-      state.value -= 1
-    },
-    incrementByAmount: (state, action: PayloadAction<number>) => {
-      state.value += action.payload
+    addToCar(state, action) {
+      const payload: Pizza['_id'] = action.payload
+      const isProductExist = state.cartArray.find(
+        (pizza) => pizza.id === payload
+      )
+      if (!isProductExist) {
+        state.cartArray.push({ id: payload, quantity: 1 })
+        state.totalCartQuantity += 1
+      }
+      if (isProductExist) {
+        let quantity: number
+        let newQuantity: number
+        state.cartArray.find((pizza) => {
+          {
+            quantity = pizza.quantity
+            newQuantity = quantity += 1
+            const index = state.cartArray.indexOf(pizza)
+            state.cartArray.splice(index, 1, {
+              id: payload,
+              quantity: newQuantity,
+            })
+          }
+        })
+        state.totalCartQuantity += 1
+      }
     },
   },
 })
-
-export const { increment, decrement, incrementByAmount } = QuantitySlice.actions
-export default QuantitySlice.reducer
+export const { addToCar } = cartSlice.actions
+export default cartSlice.reducer
