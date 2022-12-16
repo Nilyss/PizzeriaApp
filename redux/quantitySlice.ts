@@ -4,13 +4,11 @@ import { createSlice } from '@reduxjs/toolkit'
 type InitialState = {
   cartArray: Array<{ id: Pizza['_id']; quantity: number }>
   totalCartQuantity: 0
-  totalCartPrice: 0
 }
 
 const initialState: InitialState = {
   cartArray: [],
   totalCartQuantity: 0,
-  totalCartPrice: 0,
 }
 
 export const cartSlice = createSlice({
@@ -43,7 +41,43 @@ export const cartSlice = createSlice({
         state.totalCartQuantity += 1
       }
     },
+    removeFromCart(state, action) {
+      const payload: Pizza['_id'] = action.payload
+      const index = state.cartArray.findIndex((pizza) => pizza.id === payload)
+      if (index !== -1) {
+        const removedPizza = state.cartArray[index]
+        const newState = Object.assign({}, state, {
+          cartArray: [
+            ...state.cartArray.slice(0, index),
+            ...state.cartArray.slice(index + 1),
+          ],
+          totalCartQuantity: state.totalCartQuantity - removedPizza.quantity,
+        })
+        return newState
+      }
+      return state
+    },
+    subtractFromCart(state, action) {
+      const payload: Pizza['_id'] = action.payload
+      const index = state.cartArray.findIndex((pizza) => pizza.id === payload)
+      if (index !== -1) {
+        const updatedPizza = state.cartArray[index]
+        // if pizza quantity > 1, remove one pizza
+        if (updatedPizza.quantity > 1) {
+          updatedPizza.quantity -= 1
+          state.totalCartQuantity -= 1
+        }
+        // if pizza quantity = 1, delete pizza from state
+        else {
+          state.cartArray = [
+            ...state.cartArray.slice(0, index),
+            ...state.cartArray.slice(index + 1),
+          ]
+          state.totalCartQuantity -= 1
+        }
+      }
+    },
   },
 })
-export const { addToCar } = cartSlice.actions
+export const { addToCar, removeFromCart, subtractFromCart } = cartSlice.actions
 export default cartSlice.reducer

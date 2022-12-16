@@ -10,8 +10,8 @@ interface HomeProps {
 }
 
 export const Home: React.FunctionComponent<HomeProps> = ({ navigation }) => {
-  function goToBasket() {
-    navigation.navigate('basket')
+  function goToCart() {
+    navigation.navigate('Panier')
   }
   return (
     <ScrollView style={styles.container}>
@@ -20,7 +20,7 @@ export const Home: React.FunctionComponent<HomeProps> = ({ navigation }) => {
       <Button
         color="#FF7F50"
         title="Consulter le panier"
-        onPress={() => goToBasket()}
+        onPress={() => goToCart()}
       />
     </ScrollView>
   )

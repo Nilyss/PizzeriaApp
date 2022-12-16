@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react'
-import { useContext } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import { RouteProp, useRoute } from '@react-navigation/native'
 import { View, Text, Image, StyleSheet, Pressable } from 'react-native'
 import { Pizza } from '../models/pizza'

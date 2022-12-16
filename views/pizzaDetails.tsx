@@ -11,8 +11,8 @@ interface MenuProps {
 export const PizzaDetails: React.FunctionComponent<MenuProps> = ({
   navigation,
 }) => {
-  function goToBasket() {
-    navigation.navigate('basket')
+  function goToCart() {
+    navigation.navigate('Panier')
   }
   return (
     <ScrollView style={styles.container}>
@@ -23,7 +23,7 @@ export const PizzaDetails: React.FunctionComponent<MenuProps> = ({
           <Button
             color="#FF7F50"
             title="Consulter le panier"
-            onPress={() => goToBasket()}
+            onPress={() => goToCart()}
           />
         </View>
       </View>
