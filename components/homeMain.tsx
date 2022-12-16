@@ -10,7 +10,7 @@ export const HomeMain: React.FunctionComponent<HomeMainProps> = (
   const pizzas = useContext(PizzaContext)
 
   function goToTargetPizza(id: string) {
-    navigation.navigate('pizza', { id })
+    navigation.navigate('Pizza', { id })
   }
 
   return (

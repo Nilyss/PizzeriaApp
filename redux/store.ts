@@ -1,9 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit'
-import { QuantitySlice } from './quantitySlice'
+import { cartSlice } from './quantitySlice'
 
 export const store = configureStore({
   reducer: {
-    quantity: QuantitySlice.reducer,
+    cart: cartSlice.reducer,
   },
 })
 export type RootState = ReturnType<typeof store.getState>
